@@ -1,7 +1,6 @@
 package com.gu.contentapi.json
 
-import com.gu.contentapi.circe.CirceScroogeMacros
-import com.gu.contentapi.client.model.v1.{EditionsResponse, TagType}
+import com.gu.contentapi.client.model.v1.{EditionsResponse, ItemResponse, SectionsResponse, TagType}
 import com.gu.contentapi.json.utils.JsonLoader
 import io.circe.{Decoder, Encoder, Json}
 import io.circe.syntax._
@@ -12,6 +11,7 @@ import org.json4s.jackson.JsonMethods
 import org.scalatest.{FlatSpec, Matchers}
 import com.gu.contentapi.circe.CirceScroogeMacros._
 import com.gu.contentapi.json.CirceDeserialization._
+import com.gu.contentapi.json.CirceSerialization._
 import com.gu.contentapi.json.utils.Json4sDecoder._
 
 class CirceRoundTripSpec extends FlatSpec with Matchers {
@@ -26,6 +26,14 @@ class CirceRoundTripSpec extends FlatSpec with Matchers {
 
   it should "round-trip an EditionsResponse" in {
     checkRoundTrip[EditionsResponse]("editions.json")
+  }
+
+  it should "round-trip a SectionsResponse" in {
+    checkRoundTrip[SectionsResponse]("sections.json")
+  }
+
+  it should "round-trip an ItemResponse with tags" in {
+    checkRoundTrip[ItemResponse]("item-tag.json")
   }
 
 
